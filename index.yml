@@ -54,9 +54,13 @@ notebooks:
       ja-JP:
         title: ポケモンインデックス
         description: httpx を使って Codetto が公開 HTTP API を呼び出す方法を示すデモ
+      hi-IN:
+        title: पोकेमॉन इंडेक्स
+        description: यह दिखाने के लिए डेमो कि Codetto httpx का उपयोग करके सार्वजनिक HTTP API कैसे कॉल कर सकता है
     languages:
       - en-US
       - ja-JP
+      - hi-IN
   - path: rush_e.ipynb
     title: Rush E
     category: showcases
