@@ -112,3 +112,31 @@ notebooks:
     estimated_time: 10
     languages:
       - en-US
+  - path: welcome_to_codetto.ipynb
+    title: Welcome to Codetto!
+    category: guides
+    tags:
+      - Getting Started
+    stable_id: WELCOME
+    stable_version: 1.0.0
+    description: A quick tour of Codetto — how to get around, and where to start.
+    estimated_time: 5
+    i18n:
+      ja-JP:
+        title: Codetto へようこそ！
+        description: Codetto の簡単な案内 — 使い方の基本と、どこから始めるか。
+      hi-IN:
+        title: Codetto में आपका स्वागत है!
+        description: Codetto की एक झलक — इसमें कैसे घूमें, और कहाँ से शुरू करें।
+      fa-IR:
+        title: به Codetto خوش آمدید!
+        description: یک معرفی کوتاه از Codetto — چطور در آن حرکت کنید و از کجا شروع کنید.
+      mn-MN:
+        title: Codetto-д тавтай морил!
+        description: Codetto-гийн товч танилцуулга — хэрхэн замаа олох, хаанаас эхлэх вэ.
+    languages:
+      - en-US
+      - ja-JP
+      - hi-IN
+      - fa-IR
+      - mn-MN
