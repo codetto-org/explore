@@ -273,6 +273,20 @@ img = Image.open('/attachments/photo.jpg')
 }
 ```
 
+**Indent Python with 2 spaces, not 4.** Every nested block in a code cell (function bodies, `for`/`while`/`if`, `with`, `try`/`except`, class bodies) uses a 2-space step. This keeps short teaching snippets from marching off the right edge on the narrow cell widths students read on (phones and Chromebooks included). Apply it consistently — never mix 2- and 4-space indentation within a notebook.
+
+```json
+"source": [
+  "def greet(name):\n",
+  "  if name:\n",
+  "    print(f'Hello, {name}!')\n",
+  "  else:\n",
+  "    print('Hello there!')\n",
+  "\n",
+  "greet('World')"
+]
+```
+
 ---
 
 ## Platform-specific cell types
@@ -1150,7 +1164,7 @@ A well-structured K-12 lesson notebook follows this pattern:
 5. **Form-field code cell** — interactive experiment where students tweak parameters
 6. **CFU cells** — 2–4 check-for-understanding questions at the end
 
-Keep code cells short (under 20 lines). Prefer multiple small cells over one large one so students can run incrementally and see output after each step.
+Keep code cells short (under 20 lines). Prefer multiple small cells over one large one so students can run incrementally and see output after each step. Indent with **2 spaces** (see the **Code cell** section above).
 
 ---
 
@@ -1158,6 +1172,7 @@ Keep code cells short (under 20 lines). Prefer multiple small cells over one lar
 
 - **Always use `Write` (never `NotebookEdit`)** when creating or editing notebooks
 - `source` must be an **array of strings**, each line ending with `\n` except the last
+- Indent Python code cells with **2 spaces**, never 4; never mix the two within a notebook
 - `submitted_answer` in CFU cells must be `""` (never omit it)
 - Set `cell.id` on every cell — use descriptive kebab-case names
 - Set `metadata.codetto.title` in the notebook metadata (all Codetto-specific metadata fields go under `metadata.codetto`, never as flat top-level keys)
