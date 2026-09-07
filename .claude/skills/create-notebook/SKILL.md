@@ -39,7 +39,7 @@ All Codetto-specific metadata lives under a single `metadata.codetto` object, na
     "color": "...",
     "progress": 0,
     "image": "...",
-    "category": "how-tos",
+    "category": "concepts",
     "tags": ["..."],
     "estimated_time": 15,
     "stable_id": "...",
@@ -127,7 +127,7 @@ Integer `0–100` shown as a `v-progress-linear` bar pinned to the bottom edge o
 
 ### Image
 
-Base64 data URL used as the background image on the index card. Overrides the default ruled-notebook SVG placeholder for both light and dark themes. Use a JPEG for photos, PNG for graphics with transparency.
+Base64 JPEG data URL used as the background image on the index card. Overrides the default ruled-notebook SVG placeholder.
 
 ```json
 "metadata": {
@@ -137,13 +137,19 @@ Base64 data URL used as the background image on the index card. Overrides the de
 }
 ```
 
-To generate the base64 string from a file:
+**If a source image file is supplied, generate this value with the `notebook-image` script — do not hand-roll it with `base64`.** The script reproduces the teacher-upload pipeline: downscale so the longest side is ≤ 800px, then re-encode as JPEG at quality 0.82 / 0.70 / 0.55, taking the first result under 400 KB.
 
 ```bash
-base64 -i image.jpg | tr -d '\n'
+npm install                                          # first time only (installs jimp)
+node scripts/notebook-image.mjs path/to/cover.png    # prints the data: URL to stdout
+
+# ready to splice into the JSON:
+node scripts/notebook-image.mjs path/to/cover.png --json   # -> {"image": "data:image/jpeg;base64,..."}
 ```
 
-Then prefix with `data:image/jpeg;base64,` (or `data:image/png;base64,` for PNG). Keep images small — 50–100 KB is reasonable; very large images bloat the notebook file and slow index load.
+Run it from this repo's root (`npm run notebook-image -- path/to/cover.png` also works). Accepts `.png` / `.jpg` / `.jpeg` / `.webp` / `.gif` / `.bmp`. Progress and size info go to stderr; only the data URL goes to stdout. It exits non-zero (and writes nothing to stdout) if the image cannot be squeezed under 400 KB even at the lowest quality — pick a simpler or smaller source in that case. If no image file is supplied, omit `image` entirely and the placeholder is used.
+
+> The three sizing constants at the top of `scripts/notebook-image.mjs` (max 800px, JPEG quality ladder, 400 KB cap) mirror `src/utils/imageResize.ts` in `codetto/core`, which is the pipeline the app itself runs when a teacher uploads an image. Keep them in sync if the app's ever change. This script encodes the JPEG with jimp rather than a browser `<canvas>`, so its bytes differ slightly from a real upload — the dimensions and the size cap are identical.
 
 ### Category, Tags, and Estimated Time
 
@@ -152,14 +158,14 @@ Then prefix with `data:image/jpeg;base64,` (or `data:image/png;base64,` for PNG)
 ```json
 "metadata": {
   "codetto": {
-    "category": "how-tos",
+    "category": "concepts",
     "tags": ["variables", "loops"],
     "estimated_time": 15
   }
 }
 ```
 
-- `category` — one of exactly `"how-tos"` | `"demos"` | `"templates"`. No other values are accepted.
+- `category` — one of exactly `"guides"` | `"concepts"` | `"showcases"` | `"starters"`. No other values are accepted, and `npm run generate:explore-index` fails outright on any other value. (Earlier versions of this enum used `"how-tos"`/`"demos"`/`"templates"`; those names are dead now.)
 - `tags` — free-form `string[]`, shown as filter chips in the Explore sidebar.
 - `estimated_time` — integer minutes, shown near the card footer as "N min".
 
@@ -1168,6 +1174,23 @@ Keep code cells short (under 20 lines). Prefer multiple small cells over one lar
 
 ---
 
+## Concept notebooks (library walkthroughs)
+
+`public/curriculum/explore/` holds a family of notebooks that each teach one Python library end to end — NumPy, Pandas, Matplotlib, scikit-learn, and so on. When you add another, match the shape the existing ones share:
+
+- **Between 5 and 10 main sections.** Each section opens with a level-1 Markdown heading (`# Section Name`) as the first line of its intro cell. The notebook minimap turns every leading `#` H1 into a collapsible section marker, so this is what makes a long notebook navigable — use `##` only for a sub-point *within* a section, never to start one.
+- **A section is one Markdown intro cell + one short code cell** (occasionally two code cells). The Markdown explains the idea in two or three short paragraphs and **bolds the key term** the first time it appears; the code cell demonstrates it in under 20 lines.
+- **One interactive cell**, usually near the middle: a code cell with a `#@param` slider or dropdown and the `"run_on_field_change"` tag, so students change a value and see the effect immediately.
+- **One relatable dataset carries most of the notebook** (weekly step counts, students' study hours, monthly temperatures), rather than a fresh toy dataset in every section.
+- **End with a `# Check Your Understanding` section** of 3–5 CFU cells, mixing `multiple_choice` and `true_false`. This is where the "which tool does X" recall questions go.
+- **No video or journal cells** in this family — they are lean, self-paced references.
+- **Metadata:** `category: "concepts"`; sibling notebooks on the same subject share one accent `color` (the data-science set uses `#43a047`); `estimated_time` is typically 20–45; `tags` look like `["Python", "numpy"]`.
+- Keep the prose plain and direct — short sentences, commas rather than long dashes.
+
+After writing one, run `npm run generate:explore-index` and check that every code cell runs top to bottom.
+
+---
+
 ## Key rules
 
 - **Always use `Write` (never `NotebookEdit`)** when creating or editing notebooks
@@ -1180,3 +1203,4 @@ Keep code cells short (under 20 lines). Prefer multiple small cells over one lar
 - Do not include a `language_info` key; the platform doesn't use it
 - Use `{{VARIABLE}}` globals for any content that varies by locale or student context
 - Add i18n overrides to markdown cells when the notebook targets multilingual classrooms
+- For a library-walkthrough notebook, use 5–10 `#`-headed sections (see **Concept notebooks** above) so it maps cleanly in the minimap
