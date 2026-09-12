@@ -121,7 +121,7 @@ notebooks:
     languages:
       - en-US
   - path: image_segmentation.ipynb
-    title: Image segmentation
+    title: Image Segmentation
     category: concepts
     tags:
       - Computer Vision
@@ -167,7 +167,7 @@ notebooks:
     languages:
       - en-US
   - path: object_detection.ipynb
-    title: Object Detector
+    title: Object Detection
     category: concepts
     tags:
       - Computer Vision
