@@ -10,6 +10,17 @@ notebooks:
     estimated_time: 10
     languages:
       - en-US
+  - path: browser_detection.ipynb
+    title: Browser Detection
+    category: guides
+    tags:
+      - Getting Started
+    stable_id: 66CA2243-169A-4BEA-AB16-F3BCB54FD5F4
+    stable_version: 1.0.0
+    description: Learn how to detect which browser and operating system a notebook is running in, and adapt to what's supported.
+    estimated_time: 8
+    languages:
+      - en-US
   - path: reinforcement_learning_cartpole.ipynb
     title: CartPole
     category: showcases
