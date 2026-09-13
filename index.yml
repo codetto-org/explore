@@ -269,6 +269,17 @@ notebooks:
     estimated_time: 20
     languages:
       - en-US
+  - path: running_python_code.ipynb
+    title: Running Python Code
+    category: guides
+    tags:
+      - Getting Started
+    stable_id: 19360ED1-35C3-4FC8-9617-05A7906DE11A
+    stable_version: 1.0.0
+    description: 'Learn how code cells work in Codetto: running them, reading output, sharing variables between cells, and understanding errors.'
+    estimated_time: 10
+    languages:
+      - en-US
   - path: rush_e.ipynb
     title: Rush E
     category: showcases
