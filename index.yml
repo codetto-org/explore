@@ -34,6 +34,18 @@ notebooks:
     estimated_time: 30
     languages:
       - en-US
+  - path: connecting_micro_bit.ipynb
+    title: Connecting to a micro:bit
+    category: guides
+    tags:
+      - Hardware
+      - micro:bit
+    stable_id: F83AC68C-38C6-45E7-95FB-BC9713648712
+    stable_version: 1.0.0
+    description: Connect to a micro:bit device within Codetto, deploy MicroPython code, and read back data into a notebook.
+    estimated_time: 15
+    languages:
+      - en-US
   - path: graphics_canvas.ipynb
     title: Drawing on a Canvas
     category: concepts
