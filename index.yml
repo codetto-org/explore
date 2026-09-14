@@ -36,7 +36,7 @@ notebooks:
       - en-US
   - path: connecting_micro_bit.ipynb
     title: Connecting to a micro:bit
-    category: guides
+    category: concepts
     tags:
       - Hardware
       - micro:bit
