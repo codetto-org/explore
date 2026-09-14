@@ -1,6 +1,6 @@
 # Skill: Create Codetto Notebook
 
-You are creating a `.ipynb` notebook for the **Codetto** platform — a browser-based Jupyter client for K-12 students that runs Python via Pyodide (in-browser, no server). This skill covers all platform-specific extensions beyond standard `.ipynb` format.
+You are creating a `.ipynb` notebook for the **Codetto** platform — a browser-based Jupyter client for high school students that runs Python via Pyodide (in-browser, no server). This skill covers all platform-specific extensions beyond standard `.ipynb` format.
 
 ## Notebook file format
 
@@ -127,7 +127,7 @@ Integer `0–100` shown as a `v-progress-linear` bar pinned to the bottom edge o
 
 ### Image
 
-Base64 JPEG data URL used as the background image on the index card. Overrides the default ruled-notebook SVG placeholder.
+Base64 JPEG data URL used as the background image on the index card. Overrides the default ruled-notebook SVG placeholder. If no source image is supplied, omit `image` entirely and the placeholder is used.
 
 ```json
 "metadata": {
@@ -137,19 +137,7 @@ Base64 JPEG data URL used as the background image on the index card. Overrides t
 }
 ```
 
-**If a source image file is supplied, generate this value with the `notebook-image` script — do not hand-roll it with `base64`.** The script reproduces the teacher-upload pipeline: downscale so the longest side is ≤ 800px, then re-encode as JPEG at quality 0.82 / 0.70 / 0.55, taking the first result under 400 KB.
-
-```bash
-npm install                                          # first time only (installs jimp)
-node scripts/notebook-image.mjs path/to/cover.png    # prints the data: URL to stdout
-
-# ready to splice into the JSON:
-node scripts/notebook-image.mjs path/to/cover.png --json   # -> {"image": "data:image/jpeg;base64,..."}
-```
-
-Run it from this repo's root (`npm run notebook-image -- path/to/cover.png` also works). Accepts `.png` / `.jpg` / `.jpeg` / `.webp` / `.gif` / `.bmp`. Progress and size info go to stderr; only the data URL goes to stdout. It exits non-zero (and writes nothing to stdout) if the image cannot be squeezed under 400 KB even at the lowest quality — pick a simpler or smaller source in that case. If no image file is supplied, omit `image` entirely and the placeholder is used.
-
-> The three sizing constants at the top of `scripts/notebook-image.mjs` (max 800px, JPEG quality ladder, 400 KB cap) mirror `src/utils/imageResize.ts` in `codetto/core`, which is the pipeline the app itself runs when a teacher uploads an image. Keep them in sync if the app's ever change. This script encodes the JPEG with jimp rather than a browser `<canvas>`, so its bytes differ slightly from a real upload — the dimensions and the size cap are identical.
+**If a source image file is supplied, use the `set-notebook-image` skill to generate and splice in this value** — it covers the `notebook-image` script (resize/compress pipeline, do not hand-roll with `base64`) and the safe way to write the field into the notebook JSON.
 
 ### Category, Tags, and Estimated Time
 
@@ -1161,7 +1149,7 @@ Always set a meaningful `id` on each cell. IDs must be unique within the noteboo
 
 ## Typical lesson structure
 
-A well-structured K-12 lesson notebook follows this pattern:
+A well-structured lesson notebook follows this pattern:
 
 1. **Video cell** — short intro video (optional)
 2. **Markdown** — learning objective(s) for the lesson
