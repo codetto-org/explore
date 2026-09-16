@@ -55,6 +55,16 @@ notebooks:
     estimated_time: 15
     languages:
       - en-US
+  - path: Diagrams in Notebooks.ipynb
+    title: Diagrams in Notebooks
+    category: guides
+    tags: []
+    stable_id: B11DCC31-6ADE-497F-9909-4E73423402D1
+    stable_version: 1.0.0
+    description: Learn how to embed flowcharts, sequence diagrams, and other diagrams in a notebook using diagram cells.
+    estimated_time: 10
+    languages:
+      - en-US
   - path: Drawing on a Canvas.ipynb
     title: Drawing on a Canvas
     category: concepts
@@ -64,6 +74,16 @@ notebooks:
     stable_version: 1.0.0
     description: Draw shapes, lines, text, gradients, and pictures with Codetto's graphics library, then make a canvas that responds to clicks and key presses.
     estimated_time: 25
+    languages:
+      - en-US
+  - path: Embedding Slides.ipynb
+    title: Embedding Slides
+    category: guides
+    tags: []
+    stable_id: 2494BDD4-605F-4F84-BC12-4D5F1EA53298
+    stable_version: 1.0.0
+    description: Learn how to embed a slide deck inside a notebook using presentation cells.
+    estimated_time: 10
     languages:
       - en-US
   - path: Encryption Basics.ipynb
@@ -397,3 +417,13 @@ notebooks:
       - hi-IN
       - fa-IR
       - mn-MN
+  - path: Writing with Markdown.ipynb
+    title: Writing with Markdown
+    category: guides
+    tags: []
+    stable_id: FC1F610C-5910-4439-88F4-B556BA31A19E
+    stable_version: 1.0.0
+    description: Learn how to use markdown cells in notebooks, format text, and add images.
+    estimated_time: 10
+    languages:
+      - en-US
