@@ -4,7 +4,7 @@ notebooks:
     category: guides
     tags: []
     stable_id: 81424A59-6B7C-4A5A-8832-B13A6B9CBB13
-    stable_version: 1.0.0
+    stable_version: 1.0.1
     description: Learn how to attach external files to a notebook, and then read and write them using Python.
     estimated_time: 10
     languages:
