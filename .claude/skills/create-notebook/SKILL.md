@@ -727,20 +727,38 @@ c.on_key(' ', on_space)     # plain string, e.g. ' ', 'a', 'ArrowLeft'
 c.run()                     # blocks in an event loop; Stop button works within ~250ms, same as scene3d.run()
 ```
 
-### `cv` — webcam and computer vision
+### `webcam` — camera feed
 
-All detectors accept an optional `delegate="GPU"` argument (default). Falls back to CPU automatically with a printed warning if GPU is unavailable.
+```python
+from codetto import graphics, webcam
+
+canvas = graphics.canvas()           # auto-sized (full cell width, 4:3)
+canvas = graphics.canvas(640, 480)   # explicit pixels
+camera = webcam.start(canvas)               # starts webcam feed; canvas is optional (headless camera)
+camera = webcam.start(canvas, mirror=True)  # flips the display (and detector coordinates) horizontally, like a mirror/video call
+
+jpeg_data_url = camera.capture_frame()
+# Returns "data:image/jpeg;base64,..." — suitable for passing to a VLM API as an image input.
+# The camera must have produced at least one frame before calling this.
+
+frame = camera.capture_array()       # BGR numpy array for OpenCV — needs `import cv2` in the cell
+
+camera.stop()
+```
+
+Use `webcam` for the camera — never `cv.start_camera`/`cv.capture_frame` (legacy aliases kept only so old notebooks still run).
+
+### `cv` — MediaPipe computer vision
+
+Every `cv` detector attaches to a camera from `webcam.start(...)`. All detectors accept an optional `delegate="GPU"` argument (default). Falls back to CPU automatically with a printed warning if GPU is unavailable.
 
 **Setup:**
 
 ```python
-from codetto import cv
-from codetto import graphics
+from codetto import cv, graphics, webcam
 
-canvas = graphics.canvas()           # auto-sized (full cell width, 4:3)
-canvas = graphics.canvas(640, 480)   # explicit pixels
-camera = cv.start_camera(canvas)               # starts webcam feed; canvas is optional (headless camera)
-camera = cv.start_camera(canvas, mirror=True)  # flips the display (and detector coordinates) horizontally, like a mirror/video call
+canvas = graphics.canvas()
+camera = webcam.start(canvas)
 ```
 
 **Face detection** (BlazeFace):
@@ -814,19 +832,7 @@ segmenter.stop()
 
 Available `cv.SEGMENT` classes: `BACKGROUND`, `HAIR`, `BODY_SKIN`, `FACE_SKIN`, `CLOTHES`, `OTHERS`.
 
-**Capturing a still frame:**
-
-```python
-jpeg_data_url = cv.capture_frame(camera)
-# Returns "data:image/jpeg;base64,..." — suitable for passing to a VLM API as an image input.
-# The camera must have produced at least one frame before calling this.
-```
-
-**Stopping everything:**
-
-```python
-camera.stop()
-```
+**Stopping everything:** stop each detector/segmenter, then `camera.stop()`.
 
 ### `scene3d` — interactive 3D scenes (BabylonJS)
 
