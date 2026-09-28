@@ -231,6 +231,18 @@ notebooks:
     estimated_time: 20
     languages:
       - en-US
+  - path: OpenCV YOLOX.ipynb
+    title: OpenCV YOLOX
+    category: concepts
+    tags:
+      - opencv
+      - Computer Vision
+    stable_id: 809A241E-EEE6-4F90-BFF5-01F2910C5A06
+    stable_version: 1.0.0
+    description: Use the YOLOX model in OpenCV to detect up to 80 objects using your webcam
+    estimated_time: 30
+    languages:
+      - en-US
   - path: Pandas.ipynb
     title: Pandas
     category: concepts
