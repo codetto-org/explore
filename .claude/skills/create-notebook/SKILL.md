@@ -623,7 +623,7 @@ audio.play(samples.Music.Bach)            # -> "/sample_files/bach.wav"
 box.set_texture(samples.Images.Cat)       # -> "/sample_files/cat.jpg"
 ```
 
-- `samples.Images`, `samples.Sounds`, `samples.Music` are namespace classes; their attributes are plain path strings, so they drop into any API that takes a file path (`audio.play()`, `graphics.draw_image()`, `set_texture()`, `open()`, …) exactly like a raw string would.
+- `samples.Images`, `samples.Sounds`, `samples.Music` are namespace classes; their attributes are plain path strings, so they drop into any API that takes a file path (`audio.play()`, `graphics2d.draw_image()`, `set_texture()`, `open()`, …) exactly like a raw string would.
 - Constant names are a PascalCase conversion of the filename stem, e.g. `coin_pickup.wav` → `samples.Sounds.CoinPickup`, `space_ambience.wav` → `samples.Sounds.SpaceAmbience`.
 - Prefer `samples.*` constants over raw `/sample_files/...` strings in new lesson notebooks — raw strings still work, but the constants are what students see autocomplete for.
 
@@ -664,16 +664,16 @@ await audio.speak_async("This doesn't block.")        # fire and forget
 
 Supported formats: WAV, MP3, OGG, M4A, FLAC.
 
-### `graphics` — canvas drawing
+### `graphics2d` — canvas drawing
 
 ```python
-from codetto import graphics
+from codetto import graphics2d
 
-c = graphics.canvas()               # auto-size (full cell width, 4:3)
-c = graphics.canvas(640, 480)       # explicit pixels
+c = graphics2d.canvas()               # auto-size (full cell width, 4:3)
+c = graphics2d.canvas(640, 480)       # explicit pixels
 
 # Draw an image file (scaled to fill the whole canvas)
-graphics.draw_image(c, '/sample_files/cat.jpg')
+graphics2d.draw_image(c, '/sample_files/cat.jpg')
 
 # Access HTML Canvas 2D context methods via DOMProxy (snake_case → camelCase)
 ctx = c.get_context('2d')
@@ -695,7 +695,7 @@ gradient.add_color_stop(1, '#0000ff')
 ctx.fill_style = gradient
 ctx.fill_rect(0, 0, 200, 100)
 
-img = graphics.load_image('/sample_files/cat.jpg')    # file path, /attachments/, or a data: URL
+img = graphics2d.load_image('/sample_files/cat.jpg')    # file path, /attachments/, or a data: URL
 pattern = ctx.create_pattern(img, 'repeat')
 ctx.fill_style = pattern
 ctx.fill_rect(0, 100, 200, 100)
@@ -708,7 +708,7 @@ data_url = c.to_data_url()                                          # PNG; defau
 data_url = c.to_data_url(include_camera=False)                       # student's drawing only, no camera layer
 data_url = c.to_data_url('image/jpeg', 0.85, include_camera=False)   # smaller payload for photo-like content
 
-graphics.display_image(data_url)   # shows a data: URL in the cell output (click-to-zoom/save, like a displayed PIL image)
+graphics2d.display_image(data_url)   # shows a data: URL in the cell output (click-to-zoom/save, like a displayed PIL image)
 ```
 
 `to_data_url()` is the one method on `canvas` that accepts keyword arguments (`mime_type`, `quality`, `include_camera`) — everything else on `canvas`/`ctx` is positional-only. Prefer `mime_type="image/jpeg"` with a `quality` (e.g. `0.85`) for camera-derived or photographic content — PNG compresses it poorly and large canvases can hit the bridge's payload size limit.
@@ -724,16 +724,16 @@ def on_space():
 
 c.on_click(on_click)
 c.on_key(' ', on_space)     # plain string, e.g. ' ', 'a', 'ArrowLeft'
-c.run()                     # blocks in an event loop; Stop button works within ~250ms, same as scene3d.run()
+c.run()                     # blocks in an event loop; Stop button works within ~250ms, same as graphics3d.Scene.run()
 ```
 
 ### `webcam` — camera feed
 
 ```python
-from codetto import graphics, webcam
+from codetto import graphics2d, webcam
 
-canvas = graphics.canvas()           # auto-sized (full cell width, 4:3)
-canvas = graphics.canvas(640, 480)   # explicit pixels
+canvas = graphics2d.canvas()           # auto-sized (full cell width, 4:3)
+canvas = graphics2d.canvas(640, 480)   # explicit pixels
 camera = webcam.start(canvas)               # starts webcam feed; canvas is optional (headless camera)
 camera = webcam.start(canvas, mirror=True)  # flips the display (and detector coordinates) horizontally, like a mirror/video call
 
@@ -755,9 +755,9 @@ Every `cv` detector attaches to a camera from `webcam.start(...)`. All detectors
 **Setup:**
 
 ```python
-from codetto import cv, graphics, webcam
+from codetto import cv, graphics2d, webcam
 
-canvas = graphics.canvas()
+canvas = graphics2d.canvas()
 camera = webcam.start(canvas)
 ```
 
@@ -834,36 +834,36 @@ Available `cv.SEGMENT` classes: `BACKGROUND`, `HAIR`, `BODY_SKIN`, `FACE_SKIN`, 
 
 **Stopping everything:** stop each detector/segmenter, then `camera.stop()`.
 
-### `scene3d` — interactive 3D scenes (BabylonJS)
+### `graphics3d` — interactive 3D scenes (BabylonJS)
 
 ```python
-from codetto import scene3d
+from codetto import graphics3d
 import math
 
-scene = scene3d.Scene()          # creates canvas + BabylonJS engine, shows output immediately
+scene = graphics3d.Scene()          # creates canvas + BabylonJS engine, shows output immediately
 scene.set_sky("#87CEEB")         # background colour
-scene.set_sky(scene3d.Sky.CLOUDS)  # HDR environment skybox (also drives PBR reflections)
+scene.set_sky(graphics3d.Sky.CLOUDS)  # HDR environment skybox (also drives PBR reflections)
 
 ground = scene.set_ground(length=20, width=20)  # returns a Mesh
-ground.set_material(scene3d.Material.Grass.Bright)
+ground.set_material(graphics3d.Material.Grass.Bright)
 ground.set_tiling(10)            # repeat texture 10× across the ground
 
-box = scene3d.Shapes.Box(width=1, height=1, depth=1)
+box = graphics3d.Shapes.Box(width=1, height=1, depth=1)
 box.set_position(0, 0.5, 0)
 box.set_rotation(y=45)           # degrees; any combination of x, y, z
 box.set_color("#cc4400")
 box.set_texture('/sample_files/cat.jpg')   # file path from Pyodide FS
 box.set_texture('data:image/png;base64,…') # data URL (e.g. from AI model)
 box.set_scale(1, 2, 1)           # scale on each axis
-box.set_material(scene3d.Material.Bricks.DarkClay)  # PBR material
+box.set_material(graphics3d.Material.Bricks.DarkClay)  # PBR material
 box.set_glossiness(0.3)          # 0.0 = matte, 1.0 = mirror-like (PBR only)
 box.on_click(lambda: box.set_color("#ff0000"))
 scene.add(box)
 
-sphere = scene3d.Shapes.Sphere(diameter=1, segments=16)
+sphere = graphics3d.Shapes.Sphere(diameter=1, segments=16)
 scene.add(sphere)
 
-cylinder = scene3d.Shapes.Cylinder(diameter=1, height=2, tessellation=16)
+cylinder = graphics3d.Shapes.Cylinder(diameter=1, height=2, tessellation=16)
 scene.add(cylinder)
 
 # Collision detection — call on_collide after scene.add() for both meshes, before scene.run()
@@ -874,11 +874,11 @@ box.on_collide(sphere, lambda: box.set_color("#00ff00"))  # fires once when boun
 # Key handling — register on_key before scene.run()
 # Camera arrow-key bindings are removed automatically when any on_key is registered.
 # Canvas is auto-focused so keys work immediately without clicking.
-scene.on_key(scene3d.Key.LEFT,  move_left)    # Key constants for special keys
-scene.on_key(scene3d.Key.RIGHT, move_right)
-scene.on_key(scene3d.Key.UP,    move_forward) # UP = +z (away from default camera)
-scene.on_key(scene3d.Key.DOWN,  move_back)    # DOWN = -z
-scene.on_key(scene3d.Key.SPACE, jump)
+scene.on_key(graphics3d.Key.LEFT,  move_left)    # Key constants for special keys
+scene.on_key(graphics3d.Key.RIGHT, move_right)
+scene.on_key(graphics3d.Key.UP,    move_forward) # UP = +z (away from default camera)
+scene.on_key(graphics3d.Key.DOWN,  move_back)    # DOWN = -z
+scene.on_key(graphics3d.Key.SPACE, jump)
 scene.on_key('w', move_forward)               # plain strings for letter keys
 # Available Key constants: Key.LEFT, Key.RIGHT, Key.UP, Key.DOWN,
 #                          Key.SPACE, Key.ENTER, Key.ESCAPE
@@ -908,12 +908,12 @@ scene.run()                      # blocks Python in event loop; Stop button work
 **`Group`:** groups multiple meshes so they move and rotate as a single unit. Child positions and rotations are relative to the group origin. Supports `set_position`, `set_rotation`, `set_scale`, `get_position`, `get_rotation`, `get_scale`. No appearance methods (`set_color`, `set_material`, etc.) — those belong on the individual child meshes.
 
 ```python
-car = scene3d.Group()
+car = graphics3d.Group()
 
-body = scene3d.Shapes.Box(width=2, height=0.5, depth=1)
+body = graphics3d.Shapes.Box(width=2, height=0.5, depth=1)
 body.set_color('#cc2200')
 
-wheel = scene3d.Shapes.Cylinder(diameter=0.4, height=0.15, tessellation=16)
+wheel = graphics3d.Shapes.Cylinder(diameter=0.4, height=0.15, tessellation=16)
 wheel.set_rotation(z=90)
 wheel.set_position(0.8, 0, 0.5)
 wheel.set_color('#222222')
@@ -932,8 +932,8 @@ car.set_rotation(y=45)           # rotates the whole group
 
 ```python
 # Bricks
-box.set_material(scene3d.Material.Bricks.DarkClay)
-box.set_material(scene3d.Material.Bricks.RoughStone)
+box.set_material(graphics3d.Material.Bricks.DarkClay)
+box.set_material(graphics3d.Material.Bricks.RoughStone)
 # Carpet: BlueCheckerboard, BeigePattern
 # Chip: CircuitGreen, CircuitRed, CircuitOrange, CircuitBlue
 # Fabric: BurgundyRibbed, BlueQuilted, BlackTartan, RedBlueCheck, Denim
@@ -957,11 +957,11 @@ box.set_material(scene3d.Material.Bricks.RoughStone)
 **`set_sky(color)`:** accepts a hex colour string (e.g. `"#87CEEB"`) or a `Sky` constant. When an env skybox is used, PBR materials automatically pick up IBL reflections.
 
 ```python
-scene.set_sky(scene3d.Sky.CLOUDS)
-scene.set_sky(scene3d.Sky.DEEP_SPACE)
-scene.set_sky(scene3d.Sky.MODERN_BUILDINGS)
-scene.set_sky(scene3d.Sky.ORLANDO_STADIUM)
-scene.set_sky(scene3d.Sky.PURE_SKY)
+scene.set_sky(graphics3d.Sky.CLOUDS)
+scene.set_sky(graphics3d.Sky.DEEP_SPACE)
+scene.set_sky(graphics3d.Sky.MODERN_BUILDINGS)
+scene.set_sky(graphics3d.Sky.ORLANDO_STADIUM)
+scene.set_sky(graphics3d.Sky.PURE_SKY)
 ```
 
 **`scene.ambient` — world light control:**
@@ -1021,18 +1021,20 @@ The student can still use mouse orbit and scroll-wheel zoom on top of any camera
 
 Unknown `type` values and unrecognised `material` strings are silently skipped. Use with OpenAI structured output.
 
-**Scene defaults:** ArcRotateCamera (mouse orbit/zoom), HemisphericLight, dark background. BabylonJS loads lazily the first time `scene3d` is used.
+**Scene defaults:** ArcRotateCamera (mouse orbit/zoom), HemisphericLight, dark background. BabylonJS loads lazily the first time `graphics3d` is used.
 
 **`ctx.clear()`** is a custom method that clears the full 2D overlay; all other standard Canvas2D methods work normally.
 
 **`scene.run()`** must be the last call — it blocks Python in an event loop. The Stop button interrupts it within ~250 ms.
 
-### `hardware` — physical devices (BLE heart rate monitor)
+### `devices` — external devices (heart rate monitor, game controller, micro:bit)
+
+Every device is a class with a `connect()` that returns the device object.
 
 ```python
-from codetto import hardware
+from codetto import devices
 
-hrm = hardware.HeartRateMonitor.connect()   # opens the browser's Bluetooth device picker; blocks until paired
+hrm = devices.HeartRateMonitor.connect()   # opens the browser's Bluetooth device picker; blocks until paired
 
 reading = hrm.get_reading()   # -> HeartRateReading | None, returns instantly (no bridge wait)
 if reading:
@@ -1042,11 +1044,22 @@ hrm.is_connected()   # False once the strap disconnects (explicit disconnect(), 
 hrm.disconnect()
 ```
 
-**Important:** `connect()` requires an active, still-fresh user gesture — call it as one of the very first statements in the cell. A cell that runs several seconds of computation before calling `connect()` will fail with a security error, since the click that ran the cell is no longer considered "active" by then. Chrome/Edge only (no Safari, no Firefox by default).
+```python
+pad = devices.Gamepad.connect()      # prints "Press any button…" and waits (browsers hide pads until a press)
+state = pad.read()                   # one snapshot per loop/frame
+x, y = state.left_stick              # -1..1, y is negative when pushed up
+if state.was_pressed(devices.Button.A):
+    pad.rumble(0.2)
+
+bit = devices.MicroBit.connect()     # attaches to a micro:bit device cell's connection (raises if it isn't connected)
+line = bit.read_line()               # blocks; None on disconnect. Also read_line_nowait(), clear_buffer()
+```
+
+**Important (heart rate monitor):** `connect()` requires an active, still-fresh user gesture — call it as one of the very first statements in the cell. A cell that runs several seconds of computation before calling `connect()` will fail with a security error, since the click that ran the cell is no longer considered "active" by then. Chrome/Edge only (no Safari, no Firefox by default).
 
 ### `keyboard` — key presses in canvas-less notebooks
 
-For plain console-style cells with no canvas, camera, or 3D scene. (`graphics.Canvas` and `scene3d.Scene` each have their own canvas-scoped `on_key`/`run` — use `codetto.keyboard` only when there's no canvas to attach to.)
+For plain console-style cells with no canvas, camera, or 3D scene. (`graphics2d.Canvas` and `graphics3d.Scene` each have their own canvas-scoped `on_key`/`run` — use `codetto.keyboard` only when there's no canvas to attach to.)
 
 ```python
 from codetto import keyboard
@@ -1091,9 +1104,9 @@ while running:
     clock.tick(60)          # real pygame Clock; also what lets Stop interrupt within ~1 frame
 ```
 
-**Write it as a standard `while running:` loop**, exactly like any pygame tutorial — `pygame.event.get()` returns immediately every call (never blocks), and `clock.tick(fps)` provides real frame pacing. There's no `on_key`/`wait_event` callback pattern here, unlike `scene3d`/`graphics`/`keyboard`.
+**Write it as a standard `while running:` loop**, exactly like any pygame tutorial — `pygame.event.get()` returns immediately every call (never blocks), and `clock.tick(fps)` provides real frame pacing. There's no `on_key`/`wait_event` callback pattern here, unlike `graphics3d`/`graphics2d`/`keyboard`.
 
-- **Canvas size is fixed to whatever you pass `set_mode()`** — it does not auto-fit to the cell width, unlike `graphics.canvas()`. Every boundary check in a game (`if x > 400:`) is written assuming that call fixed the coordinate space, so pick a size and treat it as final; it only scales down proportionally (`max-width: 100%`) on narrow viewports.
+- **Canvas size is fixed to whatever you pass `set_mode()`** — it does not auto-fit to the cell width, unlike `graphics2d.canvas()`. Every boundary check in a game (`if x > 400:`) is written assuming that call fixed the coordinate space, so pick a size and treat it as final; it only scales down proportionally (`max-width: 100%`) on narrow viewports.
 - **Keyboard capture is document-scoped** — no click-to-focus step needed, matching what real pygame tutorials expect. Arrow keys/Space/Page/Home/End stop scrolling the page once a display exists.
 - **Mouse position** (`pygame.mouse.get_pos()`) is canvas-scoped, in the same logical pixel coordinates as your `set_mode()` size.
 - **`pygame.mixer` plays through `codetto.audio` under the hood** — real SDL audio isn't available in this environment. `Sound.play()` and `music.load()`/`.play()`/`.stop()` work; there's only one implicit channel, so `Sound.stop()`/`set_volume()` are accepted but silently no-op, and looping/fading/panning/multiple channels aren't supported. Design games around one background track plus fire-and-forget sound effects.
