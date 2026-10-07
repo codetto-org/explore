@@ -1,4 +1,26 @@
 notebooks:
+  - path: 3D Coordinate System.ipynb
+    title: 3D Coordinate System
+    category: concepts
+    tags:
+      - 3D
+    stable_id: 4CBAB445-3D90-4AB1-AC79-0CBB84E70606
+    stable_version: 1.0.0
+    description: Visualize how X, Y, and Z axes work in a 3D scene and learn to place objects using coordinates.
+    estimated_time: 5
+    languages:
+      - en-US
+  - path: 3D Physics.ipynb
+    title: 3D Physics
+    category: concepts
+    tags:
+      - 3D
+    stable_id: CABF4887-1FD4-4BDB-8E11-0B34B237F890
+    stable_version: 1.0.0
+    description: 'Switch on the physics engine and let gravity take over: drop and stack shapes, set off a domino chain, change gravity, and build something to knock down.'
+    estimated_time: 20
+    languages:
+      - en-US
   - path: Adding Diagrams.ipynb
     title: Adding Diagrams
     category: guides
@@ -55,6 +77,7 @@ notebooks:
     tags:
       - ML
       - Reinforcement Learning
+      - numpy
     stable_id: 9A9E85D8-DFAA-443C-8BC1-F12DCF0447AC
     stable_version: 1.0.1
     description: Use reinforcement learning to train an agent to balance a pole on a moving cart.
@@ -95,6 +118,17 @@ notebooks:
     estimated_time: 15
     languages:
       - en-US
+  - path: Creating a 3D Scene.ipynb
+    title: Creating a 3D Scene
+    category: concepts
+    tags:
+      - 3D
+    stable_id: A0635038-E981-4928-AB28-B1A2C883E114
+    stable_version: 1.0.0
+    description: 'Build your first 3D world: add a sky and ground, place and shape objects, dress them in colors and materials, and choose where the camera stands.'
+    estimated_time: 25
+    languages:
+      - en-US
   - path: Drawing on a Canvas.ipynb
     title: Drawing on a Canvas
     category: concepts
@@ -120,7 +154,8 @@ notebooks:
   - path: Environment Variables.ipynb
     title: Environment Variables
     category: concepts
-    tags: []
+    tags:
+      - os
     stable_id: 503B5721-E671-4BE2-992C-2B8782BC43F8
     stable_version: 1.0.0
     description: Learn what environment variables are, read one from Python, then create your own on the Settings page and use it in code.
@@ -155,6 +190,7 @@ notebooks:
     tags:
       - ML
       - Reinforcement Learning
+      - numpy
     stable_id: 931D2CA8-16D9-4ADD-95F9-1ACE1AFE4C61
     stable_version: 1.0.1
     description: Use reinforcement learning to cross a frozen lake, avoiding the obstacles.
@@ -214,6 +250,17 @@ notebooks:
     estimated_time: 25
     languages:
       - en-US
+  - path: Interactive 3D.ipynb
+    title: Interactive 3D
+    category: concepts
+    tags:
+      - 3D
+    stable_id: 80FE9F9A-F226-4BF4-AC1B-D5A4B4F7647E
+    stable_version: 1.0.0
+    description: 'Make a 3D scene respond to you: handle clicks, key presses, and collisions, show a score on screen, add sound effects, and build a small coin-collecting game.'
+    estimated_time: 30
+    languages:
+      - en-US
   - path: Journal Cells.ipynb
     title: Journal Cells
     category: guides
@@ -222,6 +269,17 @@ notebooks:
     stable_version: 1.0.0
     description: Learn how to give students a place to write in a notebook using journal cells.
     estimated_time: 5
+    languages:
+      - en-US
+  - path: Lights, Camera, Animation.ipynb
+    title: Lights, Camera, Animation
+    category: concepts
+    tags:
+      - 3D
+    stable_id: B10CBE41-6C45-4FFA-9D4A-1026925C0130
+    stable_version: 1.0.0
+    description: 'Bring a 3D scene to life: animate shapes frame by frame, move groups of shapes as one, light the scene to set a mood, and make the camera follow the action.'
+    estimated_time: 30
     languages:
       - en-US
   - path: Matplotlib.ipynb
