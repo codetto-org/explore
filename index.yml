@@ -198,6 +198,18 @@ notebooks:
     estimated_time: 25
     languages:
       - en-US
+  - path: Game Controllers.ipynb
+    title: Game Controllers
+    category: concepts
+    tags:
+      - Games
+      - Hardware
+    stable_id: 8962E963-B160-403F-AB64-553FE1C2FF8D
+    stable_version: 1.0.0
+    description: 'Connect an Xbox, PlayStation, or Switch Pro controller to Python: read its sticks, triggers, and buttons, make it rumble, then use it to steer a 3D scene and a Pygame game.'
+    estimated_time: 25
+    languages:
+      - en-US
   - path: Gesture Painter with AI.ipynb
     title: Gesture Painter with AI
     category: showcases
@@ -434,6 +446,30 @@ notebooks:
     estimated_time: 20
     languages:
       - en-US
+  - path: Recording Audio.ipynb
+    title: Recording Audio
+    category: concepts
+    tags:
+      - Audio
+    stable_id: 2416BE77-DE16-4C3E-81C1-952FF46CFDDD
+    stable_version: 1.0.0
+    description: 'Record sound from your microphone with Codetto''s audio library: capture timed and open-ended clips, choose a microphone, keep recordings with the notebook, and turn sound into numbers you can plot, edit, and measure.'
+    estimated_time: 25
+    languages:
+      - en-US
+  - path: Running AI Models Locally.ipynb
+    title: Running AI Models Locally
+    category: concepts
+    tags:
+      - AI
+      - LLMs
+      - openai
+    stable_id: 3562DE81-27F3-4B25-9E80-EB957E10DD90
+    stable_version: 1.0.0
+    description: 'Use the OpenAI SDK with a model running on your own computer through LM Studio or Ollama: start a local server, connect to it with a localhost address, generate text, and measure how fast your machine writes.'
+    estimated_time: 20
+    languages:
+      - en-US
   - path: Running Python Code.ipynb
     title: Running Python Code
     category: guides
@@ -527,6 +563,19 @@ notebooks:
     estimated_time: 20
     languages:
       - en-US
+  - path: Using the OpenAI SDK.ipynb
+    title: Using the OpenAI SDK
+    category: concepts
+    tags:
+      - AI
+      - LLMs
+      - openai
+    stable_id: 26056657-3785-482A-8408-C85C447D8D25
+    stable_version: 1.0.0
+    description: 'Call large language models from Python with the OpenAI SDK and OpenRouter: send messages, set a persona with the system role, hold a conversation, stream a reply as it is written, and get structured data back.'
+    estimated_time: 30
+    languages:
+      - en-US
   - path: Using the Webcam.ipynb
     title: Using the Webcam
     category: concepts
@@ -543,7 +592,7 @@ notebooks:
     category: guides
     tags: []
     stable_id: WELCOME
-    stable_version: 1.0.0
+    stable_version: 1.1.0
     description: A quick tour of Codetto — how to get around, and where to start.
     estimated_time: 5
     i18n:
