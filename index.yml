@@ -330,6 +330,18 @@ notebooks:
     estimated_time: 30
     languages:
       - en-US
+  - path: OpenCV.ipynb
+    title: OpenCV
+    category: concepts
+    tags:
+      - Computer Vision
+      - opencv
+    stable_id: 88281DF4-48D4-4B2E-92FC-0E67E6015BAC
+    stable_version: 1.0.0
+    description: 'Learn how computers see with OpenCV: load, crop, recolor, and blur images, find edges and shapes, and process live video.'
+    estimated_time: 30
+    languages:
+      - en-US
   - path: Pandas.ipynb
     title: Pandas
     category: concepts
@@ -399,6 +411,18 @@ notebooks:
     estimated_time: 25
     languages:
       - en-US
+  - path: Pygame.ipynb
+    title: Pygame
+    category: concepts
+    tags:
+      - Games
+      - pygame
+    stable_id: 699987CF-F87D-4E8C-9F64-C8DCBB6DC0FF
+    stable_version: 1.0.0
+    description: 'Learn the building blocks of 2D games with Pygame: drawing, animation, keyboard and mouse input, collisions, and sound.'
+    estimated_time: 30
+    languages:
+      - en-US
   - path: QR Codes.ipynb
     title: QR Codes
     category: concepts
@@ -455,6 +479,17 @@ notebooks:
     stable_version: 1.0.0
     description: Train your first machine learning model with scikit-learn to predict a number from data.
     estimated_time: 30
+    languages:
+      - en-US
+  - path: SciPy.ipynb
+    title: SciPy
+    category: concepts
+    tags:
+      - scipy
+    stable_id: CD4C69B0-5D32-43C5-B2F2-880E1873506B
+    stable_version: 1.0.0
+    description: Use SciPy's scientific toolbox to describe, fit, solve, and smooth a day of weather sensor data.
+    estimated_time: 35
     languages:
       - en-US
   - path: Solar System Demo.ipynb
