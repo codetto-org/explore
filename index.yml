@@ -339,7 +339,7 @@ notebooks:
       - Hardware
       - Mobile
     stable_id: F844BEA3-CB50-4F4E-BABF-9ACD407B8228
-    stable_version: 1.0.0
+    stable_version: 1.1.0
     description: 'Read the accelerometer and gyroscope of a phone or tablet from Python: follow gravity and tilt, roll a ball by tilting the screen, count shakes, then record, plot, and save a whole movement.'
     estimated_time: 25
     languages:
