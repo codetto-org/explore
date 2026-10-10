@@ -21,6 +21,16 @@ notebooks:
     estimated_time: 20
     languages:
       - en-US
+  - path: Accessibility.ipynb
+    title: Accessibility
+    category: guides
+    tags: []
+    stable_id: DA1F1F06-3B8C-4B75-99E6-759184762B62
+    stable_version: 1.0.0
+    description: Learn how Codetto supports students who use a keyboard, a screen reader, or larger text, and how to make your own notebooks work for them.
+    estimated_time: 10
+    languages:
+      - en-US
   - path: Adding Diagrams.ipynb
     title: Adding Diagrams
     category: guides
@@ -46,7 +56,7 @@ notebooks:
     category: guides
     tags: []
     stable_id: 305820DE-D4EC-40A4-B3C6-F9C2169B1915
-    stable_version: 1.0.0
+    stable_version: 1.1.0
     description: Learn how to add a video to a notebook using video cells.
     estimated_time: 5
     languages:
@@ -617,7 +627,7 @@ notebooks:
     category: guides
     tags: []
     stable_id: WELCOME
-    stable_version: 1.1.0
+    stable_version: 1.2.0
     description: A quick tour of Codetto — how to get around, and where to start.
     estimated_time: 5
     i18n:
