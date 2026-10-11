@@ -429,10 +429,26 @@ notebooks:
       hi-IN:
         title: पोकेमॉन इंडेक्स
         description: यह दिखाने के लिए डेमो कि Codetto httpx का उपयोग करके सार्वजनिक HTTP API कैसे कॉल कर सकता है
+      fa-IR:
+        title: فهرست پوکمون
+        description: نمونه‌ای برای نشان دادن اینکه Codetto چطور با httpx رابط‌های برنامه‌نویسی عمومی HTTP را فراخوانی می‌کند
+      ar-SA:
+        title: فهرس بوكيمون
+        description: عرض يوضّح كيف يستطيع Codetto استدعاء واجهات HTTP العامة باستخدام httpx
+      he-IL:
+        title: אינדקס פוקימון
+        description: הדגמה שמראה איך Codetto קורא ל-API ציבוריים ב-HTTP באמצעות httpx
+      mn-MN:
+        title: Покемон индекс
+        description: Codetto нь httpx ашиглан нийтийн HTTP API-г хэрхэн дууддагийг харуулах жишээ
     languages:
       - en-US
       - ja-JP
       - hi-IN
+      - fa-IR
+      - ar-SA
+      - he-IL
+      - mn-MN
   - path: Pong.ipynb
     title: Pong
     category: showcases
@@ -643,11 +659,19 @@ notebooks:
       mn-MN:
         title: Codetto-д тавтай морил!
         description: Codetto-гийн товч танилцуулга — хэрхэн замаа олох, хаанаас эхлэх вэ.
+      ar-SA:
+        title: مرحبًا بك في Codetto!
+        description: جولة سريعة في Codetto — كيف تتنقل فيه ومن أين تبدأ.
+      he-IL:
+        title: ברוכים הבאים ל-Codetto!
+        description: סיור קצר ב-Codetto — איך מתמצאים ומאיפה מתחילים.
     languages:
       - en-US
       - ja-JP
       - hi-IN
       - fa-IR
+      - ar-SA
+      - he-IL
       - mn-MN
   - path: Writing with Markdown.ipynb
     title: Writing with Markdown
