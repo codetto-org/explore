@@ -103,6 +103,24 @@ notebooks:
     estimated_time: 25
     languages:
       - en-US
+  - path: Depth Estimation.ipynb
+    title: Depth Estimation
+    category: concepts
+    tags:
+      - opencv
+      - huggingface
+    stable_id: E809F602-21DD-4313-91E6-60AE37E45672
+    stable_version: 1.0.0
+    topics:
+      - camera-vision
+      - ai-ml
+    level: 2
+    requires:
+      - webcam
+    description: Use the MiDaS depth model in OpenCV to see how far away things are from a single webcam, then add fog and swap the background by distance.
+    estimated_time: 25
+    languages:
+      - en-US
   - path: Drawing on a Canvas.ipynb
     title: Drawing on a Canvas
     category: concepts
