@@ -809,13 +809,13 @@ notebooks:
     tags:
       - openai
     stable_id: 26056657-3785-482A-8408-C85C447D8D25
-    stable_version: 1.0.0
+    stable_version: 1.1.0
     topics:
       - ai-ml
     level: 2
     requires:
       - api-key
-    description: 'Call large language models from Python with the OpenAI SDK and OpenRouter: send messages, set a persona with the system role, hold a conversation, stream a reply as it is written, and get structured data back.'
+    description: 'Call large language models from Python with the OpenAI SDK: send messages, set a persona with the system role, hold a conversation, stream a reply as it is written, and get structured data back.'
     estimated_time: 30
     languages:
       - en-US
