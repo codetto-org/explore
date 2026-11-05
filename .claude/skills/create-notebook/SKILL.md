@@ -624,16 +624,16 @@ box.set_texture(samples.Images.Cat)       # -> "/sample_files/cat.jpg"
 ```
 
 - `samples.Images`, `samples.Sounds`, `samples.Music` are namespace classes; their attributes are plain path strings, so they drop into any API that takes a file path (`audio.play()`, `graphics2d.draw_image()`, `set_texture()`, `open()`, …) exactly like a raw string would.
-- Constant names are a PascalCase conversion of the filename stem, e.g. `coin_pickup.wav` → `samples.Sounds.CoinPickup`, `space_ambience.wav` → `samples.Sounds.SpaceAmbience`.
+- Constant names are a PascalCase conversion of the filename stem, e.g. `coin_pickup.wav` → `samples.Sounds.CoinPickup`, `ambience.wav` → `samples.Music.Ambience`.
 - Prefer `samples.*` constants over raw `/sample_files/...` strings in new lesson notebooks — raw strings still work, but the constants are what students see autocomplete for.
 
 ### `audio` — play sound files
 
 Files in `/sample_files/` are pre-loaded at startup. Files attached to the notebook (via the Attachments dialog or embedded in `metadata.codetto.files`) are available at `/attachments/` — use them the same way.
 
-- **Images:** `abstract.jpg`, `cat.jpg`, `city.jpg`, `codercub.jpg`, `dog.jpg`, `earth.jpg`, `fabric.jpg`, `forest.jpg`, `undersea.jpg`
-- **Sounds:** `clang.wav`, `coin_pickup.wav`, `correct.wav`, `door.wav`, `gameover.wav`, `incorrect.wav`, `laser.wav`, `pop.wav`, `space_ambience.wav`, `thud.wav`, `wood.wav`, `zap.wav`
-- **Music:** `ambience.wav`, `bach.wav`, `sibelius.wav`
+- **Images:** `abstract.jpg`, `cat.jpg`, `city.jpg`, `dog.jpg`, `earth.jpg`, `fabric.jpg`, `forest.jpg`, `undersea.jpg`
+- **Sounds:** `clang.wav`, `coin_pickup.wav`, `correct.wav`, `door.wav`, `gameover.wav`, `incorrect.wav`, `laser.wav`, `pop.wav`, `thud.wav`, `wood.wav`, `zap.wav`
+- **Music:** `ambience.wav`, `bach.wav`
 
 ```python
 from codetto import audio, samples
