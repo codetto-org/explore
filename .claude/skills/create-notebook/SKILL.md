@@ -629,7 +629,7 @@ box.set_texture(samples.Images.Cat)       # -> "/sample_files/cat.jpg"
 
 ### `audio` — play sound files
 
-Files in `/sample_files/` are pre-loaded at startup. Files attached to the notebook (via the Attachments dialog or embedded in `metadata.codetto.files`) are available at `/attachments/` — use them the same way.
+Files in `/sample_files/` are always there; each one downloads the first time code reads it. Files attached to the notebook (via the Attachments dialog or embedded in `metadata.codetto.files`) are available at `/attachments/` — use them the same way.
 
 - **Images:** `abstract.jpg`, `cat.jpg`, `city.jpg`, `dog.jpg`, `earth.jpg`, `fabric.jpg`, `forest.jpg`, `undersea.jpg`
 - **Sounds:** `clang.wav`, `coin_pickup.wav`, `correct.wav`, `door.wav`, `gameover.wav`, `incorrect.wav`, `laser.wav`, `pop.wav`, `thud.wav`, `wood.wav`, `zap.wav`
