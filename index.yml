@@ -161,7 +161,7 @@ notebooks:
       - gymnasium
       - numpy
     stable_id: 931D2CA8-16D9-4ADD-95F9-1ACE1AFE4C61
-    stable_version: 1.0.1
+    stable_version: 1.0.2
     topics:
       - ai-ml
       - games
